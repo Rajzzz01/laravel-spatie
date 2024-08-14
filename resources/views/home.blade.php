@@ -15,12 +15,19 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    {{-- @dd(Auth::user()->getAllPermissions()); --}}
                     <br>
-                    @can('edit articles')
-                        You can EDIT ARTICLES.
+                    @can('create')
+                        You can CREATE User.
                     @endcan
-                    @can('publish articles')
-                        You can PUBLISH ARTICLES.
+                    @can('edit')
+                        You can EDIT User.
+                    @endcan
+                    @can('delete')
+                        You can DELETE User.
+                    @endcan
+                    @can('read')
+                        You can READ User.
                     @endcan
                     @can('only super-admins can see this section')
                         Congratulations, you are a super-admin!
