@@ -52,6 +52,16 @@ return [
     */
 
     'channels' => [
+        'Users' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/users.log'),
+            'level' => 'debug',
+        ],
+        'Role-Permissions' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/role-permissions.log'),
+            'level' => 'debug',
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

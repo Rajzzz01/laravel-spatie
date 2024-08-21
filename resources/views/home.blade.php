@@ -15,7 +15,6 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                    {{-- @dd(Auth::user()->getAllPermissions()); --}}
                     <br>
                     @can('create')
                         You can CREATE User.

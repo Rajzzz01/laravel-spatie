@@ -6,10 +6,11 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-end my-2">
                     @can('create')
-                        <a href="{{ route('users.create') }}" class="btn btn-primary">{{ __('New User') }}</a>
+                        <a href="{{ route('role-permissions.create') }}" class="btn btn-primary">{{ __('New Role') }}</a>
                     @endcan
                 </div>
                 @can('read')
+
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -18,30 +19,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
                                     <th scope="col">Role</th>
-                                    @canany(['delete', 'edit'])
+                                    <th scope="col">Permissions</th>
+                                    {{-- @canany(['delete', 'edit']) --}}
                                         <th scope="col">Action</th>
-                                    @endcanany
+                                    {{-- @endcanany --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($roles as $role)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }} </th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $role->name }}</td>
                                         <td>
-                                            @foreach ($user->roles as $role)
-                                                {{ $role->name }}
+                                            @foreach ($role->permissions as $permission)
+                                                {{ $permission->name }}
                                             @endforeach
                                         </td>
                                         @canany(['delete', 'edit'])
                                             <td style="display: flex; gap: 5px">
                                                 @can('delete')
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                        onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                    <form action="{{ route('role-permissions.destroy', $role->id) }}" method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this role?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-info "><svg
@@ -53,7 +52,7 @@
                                                     </form>
                                                 @endcan
                                                 @can('edit')
-                                                    <a class="btn btn-info" href="{{ route('users.edit', ['user' => $user->id]) }}">
+                                                    <a class="btn btn-info" href="{{ route('role-permissions.edit', ['role_permission' => $role->id]) }}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
                                                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                             <path
@@ -70,6 +69,7 @@
                     </div>
                 </div>
                 @endcan
+
             </div>
         </div>
     </div>

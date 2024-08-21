@@ -31,6 +31,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <a class="navbar-brand" href="{{ route('users.index') }}"> Users</a>
+                        @hasanyrole(['Admin|Super-Admin'])
+                            <a class="navbar-brand" href="{{ route('role-permissions.index') }}"> Roles</a>
+                        @endhasanyrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
